@@ -105,8 +105,21 @@ def load_data():
     df = pd.read_csv(os.path.join(path, csv))
 
     df.columns = [c.lower() for c in df.columns]
-    lat = [c for c in df.columns if "lat" in c][0]
-    lon = [c for c in df.columns if "lon" in c][0]
+    # lat = [c for c in df.columns if "lat" in c][0]
+    # lon = [c for c in df.columns if "lon" in c][0]
+
+    print("Columns in CSV:", df.columns.tolist())  # For debug
+
+    # Try to find latitude/longitude columns
+    lat_candidates = [c for c in df.columns if "lat" in c.lower()]
+    lon_candidates = [c for c in df.columns if "lon" in c.lower()]
+
+    if not lat_candidates or not lon_candidates:
+        raise ValueError("Latitude or longitude column not found in dataset")
+
+    lat = lat_candidates[0]
+    lon = lon_candidates[0]
+
 
     # Optional road type (demo)
     if "road_type" not in df.columns:
