@@ -1,80 +1,137 @@
-# 🚗 RoadSentinel – ADAS Heatmaps & Analysis
+# RoadSentinel – ADAS Heatmaps & Analysis
 
-**Author:** Suresh Konar  
-**Purpose:** OEM-style ADAS (Advanced Driver Assistance Systems) risk heatmap for India, including AEB (Autonomous Emergency Braking) and LDW (Lane Departure Warning) risk overlays, with weather and road-type weighting.
-
----
-
-## 🔹 Description
-
-The RoadSentinel – ADAS Heatmaps & Analysis is an interactive tool built with **Streamlit** that visualizes road accident risk across India. It provides:
-
-- **ADAS Risk Heatmap:** Aggregate risk based on accident density.
-- **AEB and LDW Risk Layers:** Separate risk overlays for autonomous emergency braking and lane departure warning systems.
-- **Weather Risk:** Rain/fog risk multiplier applied to accident data.
-- **Road-Type Weighting:** National Highways (NH), State Highways (SH), and Urban roads weighted differently to reflect realistic OEM analysis.
-- **State / City Selection:** Zoom into individual cities or view all of India.
-- **Interactive Analysis:** Separate plots for AEB vs LDW risk distribution.
+**Author:** Suresh Konar
+**Purpose:** OEM-style ADAS risk heatmap visualization for India with AEB/LDW overlays, weather & road-type weighting.
 
 ---
 
-## ⚙️ Features
+## 🛠 Features
 
-1. **Interactive Map**
-   - Heatmap of ADAS risk.
-   - Separate scatter layers for AEB (red) and LDW (yellow) zones.
-   - Toggleable by tabs for readability.
-
-2. **Weather Risk**
-   - Fetches rain/fog data from [Open-Meteo API](https://open-meteo.com/).
-   - Applies a multiplier to risk scores dynamically.
-
-3. **Road-Type Weighting**
-   - NH: 1.2
-   - SH: 1.0
-   - Urban: 0.8
-   - Weighted into risk calculations.
-
-4. **Analytics**
-   - KPIs: Number of grid cells, high-risk cells, max risk.
-   - Bar charts comparing AEB vs LDW zones.
-
-5. **Data Sources**
-   - [India Road Accident Dataset](https://www.kaggle.com/datasets/data125661/india-road-accident-dataset)
-   - Open-Meteo weather API.
-   - Transparent: users can access raw data locally or via Kaggle.
-
-6. **Cities / States Covered**
-   - Maharashtra: Mumbai, Pune, Nagpur
-   - Karnataka: Bengaluru, Mysore, Mangalore
-   - Tamil Nadu: Chennai, Coimbatore, Madurai
-   - Delhi: Delhi
-   - **All India View:** Option to see aggregated data for the entire country.
+* ADAS Risk Heatmap for selected cities or full India
+* Separate AEB (Autonomous Emergency Braking) & LDW (Lane Departure Warning) risk layers
+* Weather-based risk adjustment (rain/fog)
+* Road-type weighting (NH / SH / Urban)
+* Interactive PyDeck maps with hover tooltips
+* Analysis charts for AEB / LDW risk zones
+* KPIs: High Risk Cells, Grid Cells, Max Risk
 
 ---
 
-## 📌 Technology Stack
+## 🗺 Supported Locations
 
-| Layer          | Technology / Library          | Purpose                                           |
-|----------------|-------------------------------|-------------------------------------------------|
-| Frontend / UI  | Streamlit                     | Web app framework for interactive visualization |
-| Map Visualization | PyDeck / Deck.gl            | Heatmaps and scatter overlays for ADAS risk     |
-| Charts         | Plotly Express               | Bar charts for AEB / LDW analysis               |
-| Data Handling  | Pandas / NumPy               | Data cleaning, aggregation, normalization       |
-| API            | Requests                     | Fetch weather data                               |
-| Data Download  | KaggleHub (optional)         | Download India road accident dataset            |
+### States & Cities
+
+* **Maharashtra:** Mumbai, Pune, Nagpur, Nashik, Aurangabad
+
+* **Karnataka:** Bengaluru, Mysore, Mangalore, Hubli, Dharwad
+
+* **Tamil Nadu:** Chennai, Coimbatore, Madurai, Salem, Tiruchirappalli
+
+* **Delhi:** Delhi
+
+* **West Bengal:** Kolkata, Howrah, Durgapur
+
+* **Gujarat:** Ahmedabad, Surat, Vadodara
+
+* **Madhya Pradesh:** Indore, Bhopal, Gwalior
+
+* **Rajasthan:** Jaipur, Jodhpur, Udaipur
+
+* **Full India option** available via dropdown to view the entire country dataset.
 
 ---
 
 ## ⚡ Installation & Setup
 
-1. Clone the repository:
+1. **Clone the repository:**
+
 ```bash
 git clone https://github.com/username/adas-risk-heatmap.git
 cd adas-risk-heatmap
+```
 
-1. Create a virtual environment (recommended):
+2. **Create a virtual environment (recommended):**
+
 ```bash
 python -m venv venv
-source venv/bin/activate  # Linux/Mac
-venv\Scripts\activate     # Windows
+# Linux/Mac
+source venv/bin/activate
+# Windows
+venv\Scripts\activate
+```
+
+3. **Install dependencies:**
+
+```bash
+pip install -r requirements.txt
+```
+
+4. **Run the Streamlit app:**
+
+```bash
+streamlit run app.py
+```
+
+---
+
+## 📁 Data Requirements
+
+* **Local CSV option:** Place the `India_Road_Accident_Dataset.csv` in the project folder.
+* **Kaggle API option:** Ensure your Kaggle API key is available if using `kagglehub` to download the dataset automatically.
+
+---
+
+## ⚠️ Disclaimer
+
+* Data sources are **publicly available**.
+* Risk visualization is **indicative** and intended for **research / OEM analysis purposes only**.
+* Weather data is **forecast-based** and may not reflect real-time conditions.
+* Users should **not rely on this tool for actual driving or safety decisions**.
+
+---
+
+## 📝 Notes
+
+* **AEB:** Autonomous Emergency Braking
+* **LDW:** Lane Departure Warning
+* **Grid Size:** Adjustable to control heatmap granularity.
+* **Color Legend:**
+
+  * Green: Low risk
+  * Orange: Medium risk
+  * Red: High risk
+
+---
+
+## 📚 Technology & Libraries
+
+* **Python 3.10+**
+* **Streamlit:** Web app UI
+* **PyDeck:** Interactive maps & heatmaps
+* **Plotly Express:** Graphical analysis for risk zones
+* **Pandas / NumPy:** Data processing
+* **Requests:** Fetch weather forecast
+* **KaggleHub:** Download India road accident dataset
+
+---
+
+## 🔧 Usage
+
+1. Select the **State** and **City** or choose **Full India**.
+2. Adjust **Grid Size** to control heatmap resolution.
+3. Enable or disable **Weather Risk** and **Road-Type Weighting**.
+4. Run the pipeline to generate interactive maps and analysis.
+5. Explore AEB and LDW zones via separate tabs.
+
+---
+
+## 💡 Future Enhancements
+
+* Integration with real-time traffic data.
+* Precise shapefile-based city boundaries.
+* Advanced ADAS module predictions.
+* Multi-day weather and hazard forecasting.
+
+---
+
+**Author Contact:** [msuresh9122002@gmail.com](mailto:msuresh9122002@gmail.com)
